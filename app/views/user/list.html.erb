@@ -1,0 +1,37 @@
+
+
+<!-- <%= link_to("Create New User", {:action =>'signup'}) %> -->
+
+<table> <!-- style="border:1px solid black" -->
+  <tr>
+    <th> id</th>
+    <th> username</th>
+    <th> email</th>
+    <th> Admin(usertype) </th>
+    <th> status</th>
+    <th>last created</th>
+    <th>last updated</th>
+    <th>operate</th>
+  </tr>
+  <%  @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.usertype==1?'yes':'no' %></td>
+        <td><%= user.status %></td>
+        <td><%= user.created_at.localtime  %></td>
+        <td><%= user.updated_at.localtime %></td>
+        <td>
+         <%= link_to("Edit", {:action =>'edit', :id=>user.id}, :class=>'action edit') %> |
+          <%= link_to("Delete", {:action =>'delete', :id=>user.id}, :class=>'action delete') %> |
+          <%= link_to("Show Secrets", {:controller=>'secret', :action =>'list', :user_id=>user.id}, :class=>'action delete') %>
+        </td>
+      </tr>
+
+  <% end %>
+</table>
+
+<%= link_to("Log out", {:action =>'logout'}, :class=>'action logout') %>
+
+

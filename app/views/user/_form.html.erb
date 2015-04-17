@@ -1,0 +1,14 @@
+<%= error_messages_for(@user) %>
+<table summary="User form fields">
+  <tr><td>Username</td><td><%= f.text_field(:username) %></td></tr>
+
+  <tr><td>Password</td><td><%= f.password_field :password %></td></tr>
+  <tr><td>Confirm Password</td><td><%= f.password_field :password_confirmation %></td></tr>
+
+  <tr><td>Email</td><td><%= f.text_field(:email) %></td></tr>
+
+  <!-- admin can have extra choice assign other use as admin -->
+  <% if session[:user_id] && User.find(session[:user_id]).usertype==1 %>
+    <tr><td>Administrator</td><td><%= f.select(:usertype,{"yes"=>1, "no"=>0}) %></td></tr>
+  <% end %>
+</table>
